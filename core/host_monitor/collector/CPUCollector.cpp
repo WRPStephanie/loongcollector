@@ -32,6 +32,7 @@ namespace logtail {
 const std::string CPUCollector::sName = "cpu";
 const std::string kMetricLabelCPU = "cpu";
 const std::string kMetricLabelMode = "mode";
+const std::filesystem::path PROCESS_STAT = "stat";
 
 bool CPUCollector::Collect(const HostMonitorTimerEvent::CollectConfig& collectConfig, PipelineEventGroup* group) {
     if (group == nullptr) {
@@ -93,6 +94,7 @@ bool CPUCollector::GetHostSystemCPUStat(std::vector<CPUStat>& cpus) {
     // ...
     cpus.clear();
     cpus.reserve(cpuLines.size());
+    std::cout << "cpu stat1" << std::endl;
     for (auto const& line : cpuLines) {
         std::vector<std::string> cpuMetric;
         boost::split(cpuMetric, line, boost::is_any_of(" "), boost::token_compress_on);
