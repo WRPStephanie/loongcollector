@@ -16,6 +16,7 @@
 
 #include "host_monitor/collector/SystemCollector.h"
 
+#include <chrono>
 #include <filesystem>
 #include <string>
 #include <chrono>
@@ -34,7 +35,7 @@ const std::string SystemCollector::sName = "system";
 const std::string kMetricLabelLoad = "system";
 const std::string kMetricLabelMode = "mode";
 
-SystemCollector::SystemCollector(){
+SystemCollector::SystemCollector() {
     Init();
 }
 int SystemCollector::Init(int totalCount) {
@@ -60,17 +61,17 @@ bool SystemCollector::Collect(const HostMonitorTimerEvent::CollectConfig& collec
 
     SystemStat minSys, maxSys, avgSys, lastSys;
     mCalculate.Stat(maxSys, minSys, avgSys, &lastSys);
-    
-    mCount=0;
+
+    mCount = 0;
     mCalculate.Reset();
 
     const time_t now = time(nullptr);
 
-    //数据整理
+    // 数据整理
     struct MetricDef {
         const char* name;
         const char* mode;
-        double *value;
+        double* value;
     } metrics[] = {
         {"load_1m", "Minimum", &minSys.load1},
         {"load_1m", "Maximum", &maxSys.load1},
@@ -102,7 +103,7 @@ bool SystemCollector::Collect(const HostMonitorTimerEvent::CollectConfig& collec
         metricEvent->SetValue<UntypedSingleValue>(*def.value);
         metricEvent->SetTag(kMetricLabelMode, def.mode);
     }
-    
+
     return true;
 }
 

@@ -23,9 +23,9 @@
 
 namespace logtail {
 
-extern const uint32_t kMinInterval;     
-extern const uint32_t kDefaultInterval; 
-    
+extern const uint32_t kMinInterval;
+extern const uint32_t kDefaultInterval;
+
 
 struct SystemStat {
     double load1;
@@ -57,7 +57,7 @@ class SystemCollector : public BaseCollector {
 public:
     SystemCollector();
 
-    int Init(int totalCount = kDefaultInterval/kMinInterval);
+    int Init(int totalCount = kDefaultInterval / kMinInterval);
     ~SystemCollector() override = default;
 
     bool Collect(const HostMonitorTimerEvent::CollectConfig& collectConfig, PipelineEventGroup* group) override;
