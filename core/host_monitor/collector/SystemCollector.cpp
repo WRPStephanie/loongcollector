@@ -18,7 +18,7 @@
 
 #include <filesystem>
 #include <string>
-
+#include <chrono>
 #include "boost/algorithm/string.hpp"
 #include "boost/algorithm/string/split.hpp"
 
@@ -33,23 +33,6 @@ namespace logtail {
 const std::string SystemCollector::sName = "system";
 const std::string kMetricLabelLoad = "system";
 const std::string kMetricLabelMode = "mode";
-
-const FieldName<SystemStat> systemLoadMeta[] = {
-    FIELD_ENTRY(SystemStat, load1),
-    FIELD_ENTRY(SystemStat, load5),
-    FIELD_ENTRY(SystemStat, load15),
-    FIELD_ENTRY(SystemStat, load1_per_core),
-    FIELD_ENTRY(SystemStat, load5_per_core),
-    FIELD_ENTRY(SystemStat, load15_per_core),
-};
-const size_t systemLoadMetaSize = sizeof(systemLoadMeta) / sizeof(systemLoadMeta[0]);
-const FieldName<SystemStat>* const systemLoadMetaEnd = systemLoadMeta + systemLoadMetaSize;
-static_assert(systemLoadMetaSize == sizeof(SystemStat) / sizeof(double), "systemLoadMeta unexpected");
-void enumerate(const std::function<void(const FieldName<SystemStat>&)>& callback) {
-    for (auto it = systemLoadMeta; it < systemLoadMetaEnd; ++it) {
-        callback(*it);
-    }
-}
 
 SystemCollector::SystemCollector(){
     Init();
@@ -89,24 +72,24 @@ bool SystemCollector::Collect(const HostMonitorTimerEvent::CollectConfig& collec
         const char* mode;
         double *value;
     } metrics[] = {
-        {"node_system_load_1m", "min", &minSys.load1},
-        {"node_system_load_1m", "max", &maxSys.load1},
-        {"node_system_load_1m", "avg", &avgSys.load1},
-        {"node_system_load_5m", "min", &minSys.load5},
-        {"node_system_load_5m", "max", &maxSys.load5},
-        {"node_system_load_5m", "avg", &avgSys.load5},
-        {"node_system_load_15m", "min", &minSys.load15},
-        {"node_system_load_15m", "max", &maxSys.load15},
-        {"node_system_load_15m", "avg", &avgSys.load15},
-        {"node_system_load_1m_per_core", "min", &minSys.load1_per_core},
-        {"node_system_load_1m_per_core", "max", &maxSys.load1_per_core},
-        {"node_system_load_1m_per_core", "avg", &avgSys.load1_per_core},
-        {"node_system_load_5m_per_core", "min", &minSys.load5_per_core},
-        {"node_system_load_5m_per_core", "max", &maxSys.load5_per_core},
-        {"node_system_load_5m_per_core", "avg", &avgSys.load5_per_core},
-        {"node_system_load_15m_per_core", "min", &minSys.load15_per_core},
-        {"node_system_load_15m_per_core", "max", &maxSys.load15_per_core},
-        {"node_system_load_15m_per_core", "avg", &avgSys.load15_per_core},
+        {"load_1m", "Minimum", &minSys.load1},
+        {"load_1m", "Maximum", &maxSys.load1},
+        {"load_1m", "Average", &avgSys.load1},
+        {"load_5m", "Minimum", &minSys.load5},
+        {"load_5m", "Maximum", &maxSys.load5},
+        {"load_5m", "Average", &avgSys.load5},
+        {"load_15m", "Minimum", &minSys.load15},
+        {"load_15m", "Maximum", &maxSys.load15},
+        {"load_15m", "Average", &avgSys.load15},
+        {"load_per_core_1m", "Minimum", &minSys.load1_per_core},
+        {"load_per_core_1m", "Maximum", &maxSys.load1_per_core},
+        {"load_per_core_1m", "Average", &avgSys.load1_per_core},
+        {"load_per_core_5m", "Minimum", &minSys.load5_per_core},
+        {"load_per_core_5m", "Maximum", &maxSys.load5_per_core},
+        {"load_per_core_5m", "Average", &avgSys.load5_per_core},
+        {"load_per_core_15m", "Minimum", &minSys.load15_per_core},
+        {"load_per_core_15m", "Maximum", &maxSys.load15_per_core},
+        {"load_per_core_15m", "Average", &avgSys.load15_per_core},
     };
 
     for (const auto& def : metrics) {
