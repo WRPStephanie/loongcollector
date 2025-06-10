@@ -39,13 +39,6 @@ protected:
     }
 };
 
-// void SystemInformationToolsUnittest::TestGetHostSystemStat() const {
-//     auto lines = vector<string>();
-//     std::string errorMessage;
-//     APSARA_TEST_TRUE(GetHostSystemStat(lines, errorMessage));
-//     APSARA_TEST_EQUAL(1, lines.size());
-//     APSARA_TEST_EQUAL("btime 1731142542", lines[0]);
-// }
 
 void SystemInformationToolsUnittest::TestGetHostSystemStatWithPath() const {
     auto lines = vector<string>();
@@ -55,6 +48,8 @@ void SystemInformationToolsUnittest::TestGetHostSystemStatWithPath() const {
     APSARA_TEST_EQUAL("btime 1731142542", lines[0]);
 }
 // UNIT_TEST_CASE(SystemInformationToolsUnittest, TestGetHostSystemStat);
+UNIT_TEST_CASE(SystemInformationToolsUnittest, TestGetHostSystemStatWithPath);
+
 UNIT_TEST_CASE(SystemInformationToolsUnittest, TestGetHostSystemStatWithPath);
 
 } // namespace logtail
