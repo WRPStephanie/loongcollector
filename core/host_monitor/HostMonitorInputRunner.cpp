@@ -32,12 +32,12 @@
 #include "host_monitor/HostMonitorTimerEvent.h"
 #include "host_monitor/collector/CPUCollector.h"
 #include "host_monitor/collector/ProcessEntityCollector.h"
-<<<<<<< HEAD
+
 #include "host_monitor/collector/SystemCollector.h"
-=======
-//#include "host_monitor/collector/SystemCollector.h"
+#include "host_monitor/collector/NetCollector.h"
+
 #include "host_monitor/collector/MemCollector.h"
->>>>>>> 6a4ddabb (Add MemCollector)
+
 #include "logger/Logger.h"
 #include "runner/ProcessorRunner.h"
 
@@ -49,6 +49,7 @@ HostMonitorInputRunner::HostMonitorInputRunner() {
     RegisterCollector<ProcessEntityCollector>();
     RegisterCollector<CPUCollector>();
     RegisterCollector<SystemCollector>();
+    RegisterCollector<NetCollector>();
     RegisterCollector<MemCollector>();
 
     size_t threadPoolSize = 1;
