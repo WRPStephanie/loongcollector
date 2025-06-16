@@ -54,6 +54,13 @@ private:
     bool GetNetStateByNetLink(NetState& netState);
     bool GetHostNetDev(std::vector<std::string>& lines, std::string& errorMessage);
     bool GetInterfaceConfig(InterfaceConfig& interfaceConfig, const std::string& name);
+    bool GetMemoryInformationStringOnce(MemoryInformationString& meminfoStr) override;
+    bool GetMTRRInformationStringOnce(MTRRInformationString& mtrrStr) override;
+    bool GetProcessCmdlineStringOnce(pid_t pid, ProcessCmdlineString& cmdline) override;
+    bool GetProcessStatmOnce(pid_t pid, ProcessMemoryInformation& processMemory) override;
+    bool GetProcessCredNameOnce(pid_t pid, ProcessCredName& processCredName) override;
+    bool GetExecutablePathOnce(pid_t pid, ProcessExecutePath &executePath) override;
+    bool GetProcessOpenFilesOnce(pid_t pid, ProcessFd &processFd) override;
 
     ProcParser mProcParser;
 };
