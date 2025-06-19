@@ -92,6 +92,7 @@ bool SystemInterface::GetProcessInformation(pid_t pid, ProcessInformation& proce
         pid);
 }
 
+
 bool SystemInterface::GetSystemLoadInformation(SystemLoadInformation& systemLoadInfo) {
     const std::string errorType = "system load";
     return MemoizedCall(
@@ -111,6 +112,22 @@ bool SystemInterface::GetCPUCoreNumInformation(CpuCoreNumInformation& cpuCoreNum
             return this->GetCPUCoreNumInformationOnce(static_cast<CpuCoreNumInformation&>(info));
         },
         cpuCoreNumInfo,
+
+bool SystemInterface::GetHostMeminfoStatString(MemoryInformationString& meminfoString) {
+    const std::string errorType = "mem";
+    return MemoizedCall(
+        mMemInformationCache,
+        [this](BaseInformation& info) { return this->GetMemoryInformationStringOnce(static_cast<MemoryInformationString&>(info)); },
+        meminfoString,
+        errorType);
+}
+
+bool SystemInterface::GetMTRRInformationString(MTRRInformationString& mtrrString) {
+    const std::string errorType = "mtrr";
+    return MemoizedCall(
+        mMTRRInformationCache,
+        [this](BaseInformation& info) { return this->GetMTRRInformationStringOnce(static_cast<MTRRInformationString&>(info)); },
+        mtrrString,
         errorType);
 }
 
