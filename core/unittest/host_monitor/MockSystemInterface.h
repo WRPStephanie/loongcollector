@@ -77,14 +77,6 @@ private:
         ++mMockCalledCount;
         return true;
     }
-    bool GetMemoryInformationStringOnce(MemoryInformationString& meminfoStr) override {
-        if (mBlockTime > 0) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(mBlockTime));
-        }
-        meminfoStr.collectTime = std::chrono::steady_clock::now();
-        ++mMockCalledCount;
-        return true;
-    }
 
     bool GetCPUCoreNumInformationOnce(CpuCoreNumInformation& cpuCoreNumInfo) override {
         if (mBlockTime > 0) {
