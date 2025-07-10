@@ -24,6 +24,7 @@
 #include "host_monitor/collector/NetCollector.h"
 #include "host_monitor/collector/SystemCollector.h"
 #include "host_monitor/collector/ProcessCollector.h"
+#include "host_monitor/collector/SystemCollector.h"
 
 namespace logtail {
 

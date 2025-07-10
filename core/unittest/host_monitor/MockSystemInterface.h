@@ -148,7 +148,7 @@ private:
         return true;
     }
 
-    bool GetExecutablePathOnce(pid_t pid, ProcessExecutePath &executePath) {
+    bool GetExecutablePathOnce(pid_t pid, ProcessExecutePath& executePath) {
         if (mBlockTime > 0) {
             std::this_thread::sleep_for(std::chrono::milliseconds(mBlockTime));
         }
@@ -157,7 +157,7 @@ private:
         return true;
     }
 
-    bool GetProcessOpenFilesOnce(pid_t pid, ProcessFd &processFd) {
+    bool GetProcessOpenFilesOnce(pid_t pid, ProcessFd& processFd) {
         if (mBlockTime > 0) {
             std::this_thread::sleep_for(std::chrono::milliseconds(mBlockTime));
         }
