@@ -134,9 +134,9 @@ void ProcessCollectorUnittest::TestCollect() const {
     APSARA_TEST_TRUE(collector.Collect(collectConfig, &group));
 
     vector<string> expectedVMProcessNames = {
-        "vm_process_minimum",
-        "vm_process_maximum",
-        "vm_process_average",
+        "vm_process_min",
+        "vm_process_max",
+        "vm_process_avg",
     };
 
     vector<double> expectedVMProcessValues = {
